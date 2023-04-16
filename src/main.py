@@ -1,6 +1,9 @@
 from fastapi import FastAPI
 from scrape_profile_tweets import scrape_profile_tweets_since_2023
 from starlette.responses import RedirectResponse
+from translate import run_translate
+from scrape_replies import scrape_replies
+from sentiment import sentiment_analysis
 
 description = """
 Twitter Tracker 🚀
@@ -41,8 +44,23 @@ async def tweets(twitter_handle):
     res = scrape_profile_tweets_since_2023(twitter_handle)
     return res
 
+@app.get("/replies/{twitter_handle}")
+async def replies(twitter_handle):
+    res = scrape_replies(twitter_handle)
+    return res
+
+@app.get("/translate/{twitter_handle}")
+async def run_translate():
+    res = run_translate()
+    return res
+
+@app.get("/sentiment/{twitter_handle}")
+async def sentiment(twitter_handle):
+    res = sentiment_analysis(twitter_handle)
+    return res
+
 @app.get("/")
-async def hello():
+async def redirect_to_swagger():
     return RedirectResponse(url='/docs')
 
 

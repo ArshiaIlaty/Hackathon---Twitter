@@ -1,0 +1,11 @@
+twitter_scraper_selenium
+fastapi
+pandas
+textblob
+hypercorn
+datetime
+pytz
+matplotlib
+deep_translator
+tweepy
+streamlit
